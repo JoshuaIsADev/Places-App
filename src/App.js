@@ -1,23 +1,16 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from 'react';
+import PlaceCreate from './components/PlaceCreate';
 
 function App() {
+  const [places, setPlaces] = useState([]);
+
+  const createPlace = (place) => {
+    console.log('Need to add a place with:', place);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <PlaceCreate onCreate={createPlace} />
     </div>
   );
 }
