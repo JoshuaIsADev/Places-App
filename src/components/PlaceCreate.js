@@ -14,11 +14,12 @@ function PlaceCreate({ onCreate }) {
   };
 
   return (
-    <div>
+    <div className='place-create'>
+      <h3>Add a Place</h3>
       <form onSubmit={handleSubmit}>
         <label>Place</label>
-        <input value={place} onChange={handleChange} />
-        <button>Create</button>
+        <input className='input' value={place} onChange={handleChange} />
+        <button className='button'>Create</button>
       </form>
     </div>
   );
