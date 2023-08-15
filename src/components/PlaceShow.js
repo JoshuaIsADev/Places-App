@@ -24,6 +24,10 @@ function PlaceShow({ place, onDelete, onEdit }) {
 
   return (
     <div className='place-show'>
+      <img
+        src={`https://picsum.photos/seed/places${place.id}/300/200`}
+        alt='places'
+      />
       <div>{content}</div>
       <div className='actions'>
         <button className='edit' onClick={handleEditclick}>

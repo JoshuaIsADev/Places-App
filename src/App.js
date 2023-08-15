@@ -35,6 +35,7 @@ function App() {
 
   return (
     <div className='app'>
+      <h1>Places</h1>
       <PlaceList
         onEdit={editPlaceById}
         places={places}
