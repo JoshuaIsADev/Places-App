@@ -1,14 +1,28 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
 import PlaceCreate from './components/PlaceCreate';
 import PlaceList from './components/PlaceList';
 
 function App() {
   const [places, setPlaces] = useState([]);
 
-  const editPlaceById = (id, newName) => {
+  const fetchPlaces = async () => {
+    const response = await axios.get('http://localhost:3001/places');
+
+    setPlaces(response.data);
+  };
+
+  //DONT DO THIS:
+  // fetchPlace(); it will cause an infinite loop, app will re render and fetchplaces will be called, then app will re render... and so on
+
+  const editPlaceById = async (id, newName) => {
+    const response = await axios.put(`http://localhost:3001/places/${id}`, {
+      name: newName,
+    });
+
     const updatedPlaces = places.map((place) => {
       if (place.id === id) {
-        return { ...place, name: newName };
+        return { ...place, ...response.data };
       }
 
       return place;
@@ -17,7 +31,13 @@ function App() {
     setPlaces(updatedPlaces);
   };
 
-  const deletePlaceById = (id) => {
+  useEffect(() => {
+    fetchPlaces();
+  }, []);
+
+  const deletePlaceById = async (id) => {
+    await axios.delete(`http://localhost:3001/places/${id}`);
+
     const updatedPlaces = places.filter((place) => {
       return place.id !== id;
     });
@@ -25,11 +45,12 @@ function App() {
     setPlaces(updatedPlaces);
   };
 
-  const createPlace = (name) => {
-    const updatedPlaces = [
-      ...places,
-      { id: Math.round(Math.random() * 999999), name: name },
-    ];
+  const createPlace = async (name) => {
+    const response = await axios.post('http://localhost:3001/places', {
+      name: name,
+    });
+
+    const updatedPlaces = [...places, response.data];
     setPlaces(updatedPlaces);
   };
 

@@ -1,0 +1,29 @@
+#Get all place
+GET http://localhost:3001/places HTTP/1.1
+Content-Type: application/json
+
+###
+
+#Create a place
+POST http://localhost:3001/places HTTP/1.1
+Content-Type: application/json
+
+{
+  "name": "Paris"
+}
+
+###
+
+#Update a place
+PUT http://localhost:3001/places/1 HTTP/1.1
+Content-Type: application/json
+
+{
+  "name": "Germany"
+}
+
+###
+
+#Delete a place
+DELETE http://localhost:3001/places/1 HTTP/1.1
+Content-Type: application/json
